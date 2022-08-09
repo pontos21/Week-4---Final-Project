@@ -9,7 +9,7 @@ async function getMovies(searchValue) {
   const response = await fetch(`http://www.omdbapi.com/?s=${searchValue}&apikey=79968113`)
   const data = await response.json()
   data.Search.map((movie) => {
-    movieContainer.innerHTML += generateMovieHTML(movie)
+    movieContainer.innerHTML += generateMovieHtml(movie)
   })
 }
 
