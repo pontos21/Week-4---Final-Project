@@ -2,7 +2,7 @@
 // const movieContainer 
 // const searchBar
 
-const moviesContainer = document.querySelector(".movie__container")
+const movieContainer = document.querySelector(".movie__container")
 const searchBar = document.querySelector(".search__bar")
 
 async function getMovies(searchValue) {
