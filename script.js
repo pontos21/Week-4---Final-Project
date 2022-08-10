@@ -10,7 +10,7 @@ async function getMovies(searchValue) {
 getMovies()
 
 function showMovie(id) {
-  localStorage.setItem("movie", id)
+  localStorage.setItem("id", id)
   window.location.href = `${window.location.origin}/user.html`
 }
 
