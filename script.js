@@ -1,28 +1,79 @@
 // // http://www.omdbapi.com/?s=tt3896198&apikey=79968113
 const moviesListEl = document.querySelector('.movies__list')
+const searchBar = document.querySelector('.search__bar')
+const searchBtn = document.querySelector('.search__btn')
 
-async function getMovies(searchValue) {
+
+async function getMovies(searchValue = 'Aliens') {
   const response = await fetch(`http://www.omdbapi.com/?s=${searchValue}&apikey=79968113`)
   const moviesData = await response.json()
-  moviesListEl.innerHTML = moviesData.Search.map((movie) => generateMovieHTML(movie)).join("")
+  moviesListEl.innerHTML = moviesData.Search.map((movie) => generateMovieHTML(movie) ).join('')
 }
-
 getMovies()
 
-function showMovie(id) {
-  localStorage.setItem("id", id)
-  window.location.href = `${window.location.origin}/user.html`
-}
+let searchInputValue = ''
+
+
+searchBar.addEventListener('keyup', (e) => {
+  console.log(e)
+  searchInputValue = e.target.value
+  if (e.code === 'Enter') {
+    getMovies(searchInputValue)
+  }
+})
+
+searchBtn.addEventListener('click', (e) => {
+  getMovies(searchInputValue)
+})
+
+
+
+// function showMovie(movie) {
+  
+//   // window.location.href = `${window.location.origin}/user.html`
+  
+// }
+// showMovie()
+
 
 function generateMovieHTML(movie) {
-  return `<div class="movie" onclick="showMovie(${movie.id})">
+  return `<div class="movie" onclick="showMovie${movie}">
   <div class="movie__container">
-      <img src="${movie.Poster}"alt="">
+      <img src="${movie.Poster}" alt="">
       <p>${movie.Title}</p>
       <p>${movie.Year}</p>
   </div>
 </div>`
 }
+
+
+
+
+
+// const moviesListEl = document.querySelector('.movies__list')
+
+// async function getMovies(searchValue) {
+//   const response = await fetch(`http://www.omdbapi.com/?s=${searchValue}&apikey=79968113`)
+//   const moviesData = await response.json()
+//   moviesListEl.innerHTML = moviesData.Search.map((movie) => generateMovieHTML(movie)).join("")
+// }
+
+// getMovies()
+
+// // function showMovie(id) {
+// //   localStorage.setItem("id", id)
+// //   window.location.href = `${window.location.origin}/user.html`
+// // }
+
+// function generateMovieHTML(movie) {
+//   return `<div class="movie">
+//   <div class="movie__container">
+//       <img src="${movie.Poster}"alt="">
+//       <p>${movie.Title}</p>
+//       <p>${movie.Year}</p>
+//   </div>
+// </div>`
+// }
 
 
 
